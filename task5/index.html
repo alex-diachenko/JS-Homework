@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script>
+        // удалить из строки повторяющиеся символы
+        var first = '1234156117181119999';
+        var newstr = '';
+        for(var i = 0; i< first.length; i++) {
+            if(first.lastIndexOf(first[i]) == first.indexOf(first[i])) {
+	            newstr += first[i];
+            }
+        }
+        console.log(newstr);
+
+
+        let first = '1234156117181119999';
+        first = first.split("");
+        first = first.filter(function(item, index, array) {
+	        return array.indexOf(item) == index}).join("");
+        console.log(first);
+
+
+        // количество слов в строке
+        var second = 'Hi, i am learning javascript';
+        var count = second.split(" ").length;
+            console.log(count);
+
+        // самое длинное слово в строке
+        var third = 'Hi, i am learning javascript';
+        third = third.split(",").join("");
+        third = third.split(" ");
+		var count = 0;
+		var bigWord = '';
+		    for(let i=0; i<third.length; i++) {
+			    if(count < third[i].length) {
+			        count = third[i].length;
+			        bigWord = third[i];
+                } 
+            }
+        console.log(bigWord);
+
+        // удалить пробелы в строке
+        var fourth = 'Hi, i am learning javascript';
+        let newStr = fourth.split(" ").join("");
+        console.log(newStr);
+
+        // заменить пробелы на зяпятые
+        var fifth = 'Hi, i am learning javascript';
+        let Str = fifth.split(" ").join(",");
+		console.log(Str);
+
+        // Отфильтровать массив таким образом чтобы числа были не меньше 20 используя фильтр!
+        var sixth = [3, 42, 234, 5, 3, 21, 53];
+        sixth = sixth.filter(function(value) {
+	        return value >= 20;
+        })
+        console.log(sixth);
+
+        // Вернуть новый массив из строк добавив слово месяц если к элементу если число больше 20 используя map
+        // [3, '42 месяца', '23 месяца', 5, 3, '21 месяца', '53 месяца']
+        var seventh = [3, 42, 23, 5, 3, 21, 53];
+        seventh = seventh.map(function(value) {
+			if(value > 20) {
+				return `${value} месяца`;
+            } else {
+		        return value;
+            }
+        })
+        console.log(seventh);
+
+        // используя reduce просуммировать элементы которые больше 3
+        var eight = [3, 42, 23, 5, 3, 21, 53];
+        const reducer = eight.reduce(function(accumulator, currentValue) {
+            if(currentValue <= 3) {
+				return accumulator;
+			}
+                return accumulator + currentValue;
+            },0);
+        console.log(reducer);
+
+        // Есть обьект car! пробежаться по обьекту через for in и подсчитать количество свойств в обьекте, 
+        const car = {
+            model: 'BMW',
+            price: 45000,
+            year: 2019,
+            country: 'Germany'
+        };
+        let count = 0;
+        for(prop in car) {
+	        count++;
+        }
+        console.log(count);
+
+        // Написать функцию которая принимает только поле array обьекта person и сортирует по убыванию по id и возвращает массив!!
+        const person = {
+            name: 'Vasia',
+            gender: 'male',
+            array: [{ id: 1, name: 'Vasia' }, { id: 6, name: 'Boria' }, { id: 2, name: 'Petia' }, { id: 3, name: 'Misha' }]
+        };
+        let filtered = person.array;
+        function compare( a, b ) {
+            if ( a.id < b.id ){
+                return 1;
+            }
+            if ( a.id > b.id ){
+                return -1;
+            }
+                return 0;
+            }
+        console.log(filtered.sort(compare));
+
+    </script>
+</body>
+
+</html>
