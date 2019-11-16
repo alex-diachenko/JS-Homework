@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+
+        //1) Есть код ! с помощью async await реализуем правильную последовательность!!
+
+        let pr1 = new Promise(function(res, rej) {
+            setTimeout(()=> res('1'), 1300);
+        });
+        let pr2 = new Promise(function(res, rej) {
+            return res('2');
+        });
+        let pr3 = new Promise(function(res, rej) {
+            return res('3');
+        });
+        let pr4 = new Promise(function(res, rej) {
+            setTimeout(()=> res('4'), 300);
+        });
+        let pr5 = new Promise(function(res, rej) {
+            return res('5');
+        });
+        async function way() {
+            let first = await pr1;
+            console.log(first);
+            let second = await pr2;
+            console.log(second)
+            let third = await pr3;
+            console.log(third)
+            let fourth = await pr4;
+            console.log(fourth)
+            let fifth = await pr5;
+            console.log(fifth)
+        }
+        way()
+
+        // 2) Есть роуты!! Делаем через async await то что в предыдущей!
+        // https://playwithpromise.herokuapp.com/api/order-review/last - вернет обьект с id такой( 5dcb2558526eb500173b129d )
+        // после чего используя id делаем другой запрос
+        // https://playwithpromise.herokuapp.com/api/order-review/getid/{id} 
+        // https://playwithpromise.herokuapp.com/api/order-system/product/{productId}
+    async function AsyncFunc() {
+        const response = await function AsyncFunc(url) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", url);
+                xhr.onload = () => resolve(JSON.parse(xhr.responseText));
+                xhr.send();
+            });
+        }
+        const id = await response('https://playwithpromise.herokuapp.com/api/order-review/last');
+        const resId = await response(`https://playwithpromise.herokuapp.com/api/order-review/getid/${id._id}`)
+        const order = await resId.orderList[0].productId
+        const prod1 = await response(`https://playwithpromise.herokuapp.com/api/order-system/product/${order}`)
+        
+        const id2 = await response('https://playwithpromise.herokuapp.com/api/order-review/last');
+        const resId2 = await response(`https://playwithpromise.herokuapp.com/api/order-review/getid/${id2._id}`)
+        const order2 = await resId2.orderList[1].productId
+        const prod2 = await response(`https://playwithpromise.herokuapp.com/api/order-system/product/${order2}`)
+
+        let result = Promise.all([prod1, prod2]).then(value =>  console.log(value));
+       
+    }
+    AsyncFunc()
+
+
+        
+    </script>
+</body>
+
+</html>
