@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT HW3</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+        //1) Создать обьект car со следующими свойствами model - 'Mercedes', price - '60000', type - 'sedan', year - 2019, quantity - 4 
+        // Написать функцию которая будет принимать обьект вычитать 2 с поля quantity и возвращать price*quantity !!!
+        const car = {
+            model: 'Mercedes',
+            price: '60000',
+            type: 'sedan', 
+            year: '2019', 
+            quantity: '4'
+        };
+        function getPrice(car) {
+            let price = car.price;
+            let quantity = car.quantity - 2;
+            return price * quantity;
+        }
+        getPrice(car);
+
+        // 2) Записать в новую переменную только те обьекты у которых gender - m и age > 18
+        const dataExample = [{
+            name: 'John Doe',
+            gender: 'm',
+            age: 27,
+        }, {
+            name: 'Harvey Cox',
+            gender: 'm',
+            age: 16,
+        }, {
+            name: 'Nathan Dixon',
+            gender: 'm',
+            age: 23,
+        }, {
+            name: 'Lily Wyatt',
+            gender: 'f',
+            age: 28,
+        }, {
+            name: 'Morgan Lawson',
+            gender: 'm',
+            age: 50,
+        }, {
+            name: 'Lilly Blackburn',
+            gender: 'f',
+            age: 41,
+        }, {
+            name: 'Kate Sanderson',
+            gender: 'f',
+            age: 62,
+        }, {
+            name: 'Reece Howard',
+            gender: 'm',
+            age: 31,
+        }, {
+            name: 'Adam Doherty',
+            gender: 'm',
+            age: 52,
+        }, {
+            name: 'Eloise Wallace',
+            gender: 'f',
+            age: 24,
+        }, {
+            name: 'Luke Nolan',
+            gender: 'm',
+            age: 69,
+        }];
+        let dataUpdate = [];
+            for(let i = 0; i<dataExample.length; i++) {
+	            if(dataExample[i].gender === 'm' && dataExample[i].age > 18) {
+		            dataUpdate.push(dataExample[i]);
+                }
+            }
+        console.log(dataUpdate);
+
+        // 3) Написать фунцию которая принимает 2 параметра! 1 -  число которое будет умножаться на себя такое количество раз которое указано во втором параметре!
+        function multiply(num1 , num2) {
+	        return num1**num2;
+        }
+        multiply(5, 3);
+
+        // 4) Написать функцию которая принимает 2 параметра from и to, и будет считать сумму  всех нечетных чисел и потом среднее арифметическое от этой суммы!
+        // Задачу решить 2-мя способами! Цыклами и рекурсией!
+        function sum(from, to) {
+        let x = 0;
+        let avg = 0;
+	        for(let i=from; i<=to; i++) {
+		        if(i%2!=0) {
+			        x += i;
+					avg = avg + 1;
+		        }
+	        }
+        return x / avg;
+        }
+        sum(2, 10);
+
+
+        let x = 0;
+        let count = 0;
+        function sum(from, to) {
+        if(from < to) {	
+        if(from %2 !== 0) {
+		    x+=from;
+		    count+=1;
+		    from+=1;
+        } else 
+			from+=1;
+	        sum(from, to);
+        } else console.log(x/count);
+        }
+        sum(2, 10);
+
+
+        // 5) Написать поясниние как будет выполнятся в коллстэке следующий код!
+        function a() {
+            return b();
+        }
+
+        function b() {
+            return c();
+        }
+
+        function c() {
+            return d();
+        }
+        function d() {
+            return 'HELLO';
+        }
+        a();
+
+        Вызываем функцию 'a', она записывается в коллстэк и вызывает функцию 'b', 'b' записыватся в коллстэк над 'a' и вызывает 'c', 'c' записыватся в коллстэк над 'b' и вызывает 'd', 'd' записывается в коллстэк и возвращает строку "HELLO" и коллстэк очищается
+
+        // 6) Есть переменные! Создать обьект используя эти переменные с ключами, имена которых являются значениями этих переменных!!
+        let var1 = "name";
+        let var2 = "lastName";
+        let var3 = "fullName";
+        let var4 = "age";
+
+        let obj = {};
+	        obj.name = var1;
+	        obj.lastName = var2;
+	        obj.fullName = var3;
+	        obj.age = var4;
+        console.log(obj);
+
+        // Advanced
+        // 7)  Используя  обьект который лежит в переменной impScreen отфильтровать массив в поле children по полю type
+        // чтобы остались только те у которых значение rich_text
+
+        const impScreen = {
+            name: "Impressum",
+            uuid: "0cc57361-9c7d-4f08-a6d9-c254f3516e7d",
+            content: {
+                component: "page",
+                children: [
+                    {
+                        type: "rich_text",
+                        data: {
+                            _uid: "f6c0525c-7b90-4b64-8166-de0524f53aec",
+                            content: "*Hello*, this is the **first** text!\n\nThis is a [link](https://google.com)",
+                            customClass: ""
+                        }
+                    },
+                    {
+                        type: "info_text",
+                        data: {
+                            _uid: "3fb42198-07d4-4820-90f5-08afe01b47c1",
+                            content: "Und hier kommt noch ein Absatz für Christian!",
+                            customClass: ""
+                        }
+                    },
+                    {
+                        type: "rich_text",
+                        data: {
+                            _uid: "3fb42198-07d4-4820-90f5-08afe01b47c1",
+                            content: "Absatz für Christian!",
+                            customClass: ""
+                        }
+                    },
+                    {
+                        type: "image",
+                        data: {
+                            _uid: "3fb42198-07d4-4820-90f5-08afe01b47c1",
+                            content: "Christian!",
+                            customClass: ""
+                        }
+                    }
+                ]
+            }
+        };
+
+    </script>
+</body>
+
+</html>
