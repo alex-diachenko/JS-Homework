@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>JAVASCRIPT HW3</title>
+    <title>JAVASCRIPT HW9</title>
 </head>
 
 <body>
@@ -32,11 +32,10 @@
             setTimeout(() => console.log(i), 0);
         } //выводит 10 десяток потому что начинает выполнятся цикл, доходит до максимального значения 10 и поэтому выводится сеттаймаут с результатом цикла десять раз
 
-        setTimeout(function()  {
-        for (var i = 0; i <= 10; i++) {
-            console.log(i);
+        let x = (function()  {for(var i = 0; i <= 10; i++) {
+           setTimeout(console.log(i),0) ;
         }
-        } , 0) 
+        })()
 
         // 3) Есть код!! В какой последовательности выполнится!
         function getDatas() {
@@ -80,18 +79,15 @@
         
         // 6) Создать функцию конструктор, которая принимает обьект и берет только lastName и position и создает обьект с этих свойств
         
-        function factory(...param) {
-            this.lastName = param[0].lastName;
-            this.position = param[0].position;
-
+        function factory({lastName, position}) {
             return {
-                lastName: this.lastName,
-                position: this.position
+                lastName,
+                position
             };
         }
 
-        let x = new factory({ name: 'Sergei', lastName: 'Shakhov', height: 188, position: 'Software developer' });
-        factory(x)
+        new factory ({ name: 'Sergei', lastName: 'Shakhov', height: 188, position: 'Software developer' });
+
 
         // 7)  Создать функцию конструктор, которая принимает два свойства name, lastName конкатенирует их и сохраняет в замыкании в переменной fullName
         // random свойства не будет в обьекте ОБРАТИТЕ ВНИМАНИЕ потому что есть return!! Если не было бы return то был бы обьект с одним свойством
