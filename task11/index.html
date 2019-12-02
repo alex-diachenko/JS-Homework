@@ -45,7 +45,8 @@
         // после чего используя id делаем другой запрос
         // https://playwithpromise.herokuapp.com/api/order-review/getid/{id} 
         // https://playwithpromise.herokuapp.com/api/order-system/product/{productId}
-    async function AsyncFunc() {
+        
+        async function AsyncFunc() {
         const response = await function AsyncFunc(url) {
             return new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
@@ -56,12 +57,11 @@
         }
         const id = await response('https://playwithpromise.herokuapp.com/api/order-review/last');
         const resId = await response(`https://playwithpromise.herokuapp.com/api/order-review/getid/${id._id}`)
+        
         const order = await resId.orderList[0].productId
         const prod1 = await response(`https://playwithpromise.herokuapp.com/api/order-system/product/${order}`)
-        
-        const id2 = await response('https://playwithpromise.herokuapp.com/api/order-review/last');
-        const resId2 = await response(`https://playwithpromise.herokuapp.com/api/order-review/getid/${id2._id}`)
-        const order2 = await resId2.orderList[1].productId
+
+        const order2 = await resId.orderList[1].productId
         const prod2 = await response(`https://playwithpromise.herokuapp.com/api/order-system/product/${order2}`)
 
         let result = Promise.all([prod1, prod2]).then(value =>  console.log(value));
