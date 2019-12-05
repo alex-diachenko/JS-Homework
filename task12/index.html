@@ -60,19 +60,22 @@
         
 
         let uploadedImage ='_.jpg'
-            async function pickImage() {
-                async function AsyncFunc() {
-                    let context = imagepicker.create({
-                        mode: 'single'
-                    });
-                    await context.authorize()
-                    const logRes = await context.present();
-                    selection.forEach((selected) => {
+        async function pickImage() {
+            try{
+                let context = imagepicker.create({
+                    mode: 'single'
+                });
+                const authorized = await context.authorize()
+                    const selection = context.present();
+                    for(const selected of selection) {
                         uploadedImage= selected;
-                        cropImage();
-                    });
-                }
-            };
+                        await cropImage();
+                        takePhoto();
+                    }
+            } catch(e) {
+                console.log(e)
+            }        
+        };
 
 
         /**
@@ -91,10 +94,14 @@
 
 
             async function takePhoto() {
-                const reqPermissions = await camera.requestPermissions();
-                const takePict = await camera.takePicture();
-                uploadedImage == imageAsset;
-                cropImage();
+                try{
+                    await camera.requestPermissions();
+                    const imageAsset = await camera.takePicture();
+                        uploadedImage == imageAsset;
+                        await cropImage();
+                } catch(e) {
+                    console.log(e);
+                }
             }
 
 
@@ -118,13 +125,14 @@
 
  
             async function cropImage() {
-                let source = await new imageSource.ImageSource();
-                const uploadImg = await source.fromAsset(this.uploadedImage);
-                const uplImgSrc = await this.imageCropper.show(source, cropOptions);
-                if(uplImgSrc.image !== null) {
-                    savePictureToFile(uplImgSrc.image)
-                }     
-            }
+                const source = new imageSource.ImageSource();
+                const _source = await source.fromAsset(this.uploadedImage);
+                const args = await this.imageCropper
+                    .show(source, cropOptions);
+                if (args.image !== null) {
+                    savePictureToFile(args.image);
+                }
+            }     
         /**
          * Crops picture
          */
