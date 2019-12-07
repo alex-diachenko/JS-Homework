@@ -66,15 +66,15 @@
 
         class BiggestHours {
                 static workingHours(persons) {
-                    let result = persons.sort(function(a, b) {
-                        return b.workingHoursPerDay - a.workingHoursPerDay
+                    let result = persons.reduce((prev, curr) => {
+                        if(prev.workingHoursPerDay < curr.workingHoursPerDay) prev = curr
+                        return prev;
                     })
-                    return result[0];
+                    return result;
                 }
             }
 
         BiggestHours.workingHours([person1, person2, person3, person4 ]);
-        
         //3) Есть класс App! Который принимает массив с обьектов со свойствами name, country и нужно вернуть обьект с ключами которые являются значениями свойства country где будет массивы с name!
         // как на уроке одним словом то есть так
         //  
@@ -119,7 +119,7 @@
 
         App.getCountry(users);
 
-        // ну или вот так
+        // или вот так
 
         class App{
             constructor(name, country) {
