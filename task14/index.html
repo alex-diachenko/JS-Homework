@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <title>JAVASCRIPT</title>
+</head>
+
+<body>
+    <script>
+        // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+        //1) Есть две функции конструктор! Нужно c помощью prototype сделать second родителем first!
+        function A(name) {
+            this.name = name;
+        }
+        function B(lastName) {
+            this.lastName = lastName;
+        }
+        const first = new A('Sergei');
+        const second = new B('Shakhov');
+
+        second.__proto__ = first;
+        
+        //2) Создать класс функция конструктор которого принимает два параметра position, salary, 
+        // также создать одно private поле positions = ['software developer', 'hr manager', 'project manager'], getter(get функция)!
+        // которая смотрит на поле positions, и если в position есть одно из перечисленных то возвращает true иначе false
+    
+        class Job {
+        #positions = [ 'software developer', 'hr manager', 'project manager'];
+            constructor(position, salary) {
+                this.position = position;
+                this.salary = salary;
+            }
+        get getter() {
+                return this.#positions.includes(this.position);
+            }
+        }
+        
+        let x = new Job( 'software developer', 1000)
+
+        console.log(x);
+        console.log(x.getter)
+
+        //3) Есть класс App! Добавить две функции одна из них устанавливает product(создает поле product обьект с полем name, price), вторая функция получает price 
+        // и одно статическое свойство yearOfIssue
+        class App {
+            static yearOfIssue = 2019;
+            constructor() {
+            };
+            set newProduct(nameAndPrice) {
+                nameAndPrice = nameAndPrice.split(', ');
+                this.product = {
+                    name: nameAndPrice[0],
+                    price: nameAndPrice[1],
+                }
+            };
+            priceAndYear() {
+                return [this.product.name, App.yearOfIssue];
+            } 
+			get GetPrice() {
+                return this.priceAndYear();
+            }
+            
+        }
+
+        let prod = new App();
+        prod.newProduct = "sneakers, 2000";
+        prod.GetPrice;
+
+        let prod = new App();
+        prod.product = "sneakers, 2000";
+        prod.GetPrice;
+       
+        // 4) Пишем свой split и join))!
+        function split(array) {
+            return array.map((value) => value.toString());   
+        }
+        console.log(split([1, 2, 3, 4, 5]));
+
+        function join() {
+            // your code
+        }
+
+
+        // 5) Ну и на последок перепишем класс в вид самовыз функция которая возвращает функцию-конструктор
+        class NewApp {
+            constructor(object) {
+                this.object = object;
+            }
+            getObject() {
+                return object;
+            }
+        }
+
+
+        let constructor = (function() {
+            function Something(object) {
+                this.object = object;
+            }
+            return Something;
+        })();
+        let res = new constructor("text is here");
+        
+    </script>
+</body>
+
+</html>
